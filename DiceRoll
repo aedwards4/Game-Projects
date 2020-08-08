@@ -1,0 +1,112 @@
+import random
+import time
+
+#-----Global Variables-----
+
+#Player scores
+player1_score = 10
+player2_score = 10
+
+#Which round is it?
+rounds = 1
+
+#How much are they betting?
+wager_player1 = 0
+wager_player2 = 0
+
+def main():
+  #Set up global variables
+  global player1_score
+  global player2_score
+  global rounds
+
+  while rounds <= 3:
+    print("ROUND " + str(rounds))
+
+    wager()
+
+    #Player 1 Roll
+    print("Player 1 Roll: ")
+    print(".")
+    time.sleep(.5)
+    print(".")
+    time.sleep(.5)
+    print(".")
+    player1 = dice_roll()
+    print(player1)
+
+    #Player 2 Roll
+    print("Player 2 Roll: "),
+    print(".")
+    time.sleep(.5)
+    print(".")
+    time.sleep(.5)
+    print(".")
+    player2 = dice_roll()
+    print(player2)
+
+    #Adjusting the scores based on who wins the round
+    if player1 > player2:
+      print("Player 1 wins Round " + str(rounds))
+      adjust_scores(1)
+    elif player2 > player1:
+      print("Player 2 wins Round " + str(rounds))
+      adjust_scores(2)
+    else:
+      print("Round " + str(rounds) + " is a tie.")
+
+    print("Player 1 (" + str(player1_score) + "), Player 2 (" + str(player2_score) + ")")
+    time.sleep(2)
+
+    rounds += 1
+  
+  if player1_score > player2_score:
+      print("Player 1 wins!")
+  elif player2_score > player1_score:
+    print("Player 2 wins!")
+  else:
+    print("Tie.")
+
+
+def dice_roll():
+  #Set up a single dice roll
+  diceRoll = random.randint(1,6)
+  #Return the value of rolling two dice
+  return diceRoll + diceRoll
+
+def wager():
+  #Set up global variables
+  global wager_player1
+  global wager_player2
+
+  #ask for wager amt from both players
+  wager_player1 = input("Player 1 Bet: ")
+  wager_player1 = int(wager_player1)
+  while wager_player1 < 0 or wager_player1 > player1_score:
+    wager_player1 = input("Invalid amount, try again. Player 1 Bet: ")
+    wager_player1 = int(wager_player1)
+  
+  wager_player2 = input("Player 2 Bet: ")
+  wager_player2 = int(wager_player2)
+  while wager_player2 < 0 or wager_player2 > player2_score:
+    wager_player2 = input("Invalid amount, try again. Player 2 Bet: ")
+    wager_player2 = int(wager_player2)
+
+def adjust_scores(winner):
+  #Set up global variables
+  global player1_score
+  global player2_score
+
+  if winner == 1:
+    player1_score += wager_player1
+    player2_score -= wager_player2
+    if player2_score < 0:
+      player2_score = 0
+  elif winner == 2:
+    player2_score += wager_player2
+    player1_score -= wager_player1
+    if player1_score < 0:
+      player1_score == 0
+
+
+main()
