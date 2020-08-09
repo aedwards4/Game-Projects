@@ -103,7 +103,7 @@ def display_board():
         board[29] + board[30])
   
   print (' '.join(word_template))
-  print("Used Letters: " + str(used_letters))
+  print("Used Letters: " + ', '.join(used_letters))
   print()
   return
 
