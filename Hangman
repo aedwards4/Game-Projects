@@ -73,7 +73,6 @@ def set_word():
 
   rand_index = random.randint(0,len(word_list)-1)
   secret_word = word_list[rand_index]
-  print(secret_word)
   return
 
 
